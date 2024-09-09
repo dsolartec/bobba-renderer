@@ -13,6 +13,6 @@
     "astro": "^4.14.5",
     "@astrojs/check": "^0.9.3",
     "typescript": "^5.5.4",
-    "bobba-renderer": "^0.1.0-beta-1"
+    "@dsolartec/bobba-renderer": "^0.1.0-beta-1"
   }
 }
