@@ -1,0 +1,73 @@
+---
+
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Bobba Renderer</title>
+    <style>
+      html,
+      body {
+        left: 0;
+        margin: 0;
+        padding: 0;
+        top: 0;
+        overflow: hidden;
+      }
+
+      #client {
+        height: 100vh;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="client"></div>
+    <script>
+      import { BobbaRenderer } from 'bobba-renderer';
+
+      const app = new BobbaRenderer({
+        assetsURL: 'http://localhost:5001/',
+      });
+
+      await app.initialize(document.getElementById('client'));
+
+      const room = app.getRoomsManager().createRoom({
+        tilemap: `
+          xxxxxxxxxx
+          x0000x000x
+          x0000x000x
+          00000x000x
+          x0000xxxxx
+          x0000xxxxx
+          xx00xx88xx
+          x0000x87xx
+          x0000xxxxx
+        `,
+      });
+
+      const avatar = room.createAvatar({
+        direction: 2,
+        look: 'hd-180-1.hr-100-61.ch-210-66.lg-280-110.sh-305-62',
+        roomPosition: { roomX: 0, roomY: 3, roomZ: 0 },
+      });
+
+      room.onTileClick = (pos) => avatar.move(pos);
+
+      room.createFurniture({
+        animationID: 1,
+        direction: 2,
+        name: 'rare_dragonlamp*1',
+        roomPosition: {
+          roomX: 1,
+          roomY: 2,
+          roomZ: 0,
+        },
+      });
+    </script>
+  </body>
+</html>
